@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean  id="ISomeServiceImpl" class="service.impl.ISomeServiceImpl"></bean>
+
+    <bean id="date" class="java.util.Date"></bean>
+<!--set注入-->
+   <!-- <bean id="Student" class="dao.Student">
+        <property name="name" value="lisi"></property>
+        <property name="age" value="22"></property>
+        <property name="email" value="123@qq.com"></property>
+        <property name="school" ref="School"></property>
+    </bean>
+
+    <bean id="School" class="dao.School">
+        <property name="name" value="人大"></property>
+        <property name="address" value="上海人民路"></property>
+    </bean>-->
+<!--构造注入   name属性注入-->
+   <!-- <bean id="Student" class="dao.Student">
+        <constructor-arg name="name" value="lisi"></constructor-arg>
+        <constructor-arg name="age"  value="22"></constructor-arg>
+        <constructor-arg name="email" value="123@qq.com"></constructor-arg>
+        <constructor-arg name="school" ref="School"></constructor-arg>
+    </bean>
+
+    <bean id="School" class="dao.School">
+        <property name="name" value="人大"></property>
+        <property name="address" value="上海人民路"></property>
+    </bean>-->
+
+<!--构造注入  index属性注入-->
+    <!--<bean id="Student" class="dao.Student">
+        <constructor-arg index="1" value="22"></constructor-arg>
+        <constructor-arg index="0"  value="lisi"></constructor-arg>
+        <constructor-arg index="2" value="123@qq.com"></constructor-arg>
+        <constructor-arg index="3" ref="School"></constructor-arg>
+    </bean>
+
+    <bean id="School" class="dao.School">
+        <property name="name" value="人大"></property>
+        <property name="address" value="上海人民路"></property>
+    </bean>-->
+<!--构造注入 缺省index注入 必须按照有参构造顺序-->
+    <bean id="Student" class="dao.Student">
+        <constructor-arg  value="lisi"></constructor-arg>
+        <constructor-arg   value="22"></constructor-arg>
+        <constructor-arg  value="123@qq.com"></constructor-arg>
+        <constructor-arg  ref="School"></constructor-arg>
+    </bean>
+
+    <bean id="School" class="dao.School">
+        <property name="name" value="人大"></property>
+        <property name="address" value="上海人民路"></property>
+    </bean>
+    
+
+</beans>
