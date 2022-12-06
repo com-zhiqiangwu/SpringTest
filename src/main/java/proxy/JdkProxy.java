@@ -20,9 +20,9 @@ public class JdkProxy  implements InvocationHandler {
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.println("执行方法之前的处理");
+        System.out.println("jdk:执行方法之前的处理");
         Object invoke = method.invoke(targetObj, args);
-        System.out.println("执行方法之后的处理");
+        System.out.println("jdk:执行方法之后的处理");
         return invoke;
     }
 }

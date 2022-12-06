@@ -14,9 +14,16 @@
     </properties>
 
     <dependencies>
+<!--spring的依赖-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+            <version>4.2.6.RELEASE</version>
+        </dependency>
+<!--aspectj的依赖-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
             <version>4.2.6.RELEASE</version>
         </dependency>
 
@@ -33,6 +40,8 @@
             <version>3.2.4.RELEASE</version>
             <scope>provided</scope>
         </dependency>
+
+
     </dependencies>
 
 </project>

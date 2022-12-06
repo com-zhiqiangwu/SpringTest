@@ -1,10 +1,12 @@
 import dao.Student;
 import dao.Teacher;
 import org.junit.Test;
+import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import proxy.ISomeServiceStaticProxyImpl;
 import proxy.JdkProxy;
+import proxy.MyMethodInterceptor;
 import service.SomeService;
 import service.impl.ISomeServiceImpl;
 
@@ -59,5 +61,33 @@ public class MyTest {
 
         SomeService o1 = (SomeService) o;
         o1.doSome();
-    }
+     }
+
+     @Test
+    public void test6(){
+         ISomeServiceImpl iSomeService = new ISomeServiceImpl();
+         Enhancer enhancer = new Enhancer();
+         //设置enhancer对象的父类
+         enhancer.setSuperclass(ISomeServiceImpl.class);
+         //设置enhancer的回调对象
+         enhancer.setCallback(new MyMethodInterceptor(iSomeService));
+         //创建代理对象
+         ISomeServiceImpl iSomeService1 = (ISomeServiceImpl) enhancer.create();
+         //通过代理对象调用目标方法
+         iSomeService1.doSome();
+     }
+
+
+     @Test
+    public void test7(){
+
+        /**AOP*/
+         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+         //从容器中获取目标对象
+         SomeService iSomeServiceImpl = (SomeService) ac.getBean("ISomeServiceImpl");
+         //com.sun.proxy.$Proxy8:jdk动态代理
+         System.out.println("proxy:"+iSomeServiceImpl.getClass().getName());
+         //通过代理的对象执行方法，实现目标方法执行时，增强了的功能
+         iSomeServiceImpl.doSome();
+     }
 }

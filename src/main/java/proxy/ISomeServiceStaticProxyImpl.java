@@ -12,8 +12,8 @@ public class ISomeServiceStaticProxyImpl implements SomeService {
 
     @Override
     public void doSome() {
-        System.out.println("调用方法之前动作");
+        System.out.println("staticProxy:调用方法之前动作");
         iSomeService.doSome();
-        System.out.println("调用方法之后的动作");
+        System.out.println("staticProxy:调用方法之后的动作");
     }
 }
