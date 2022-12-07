@@ -81,7 +81,7 @@ public class MyTest {
      @Test
     public void test7(){
 
-        /**AOP*/
+        /**AOP:前置通知*/
          ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
          //从容器中获取目标对象
          SomeService iSomeServiceImpl = (SomeService) ac.getBean("ISomeServiceImpl");
@@ -90,4 +90,35 @@ public class MyTest {
          //通过代理的对象执行方法，实现目标方法执行时，增强了的功能
          iSomeServiceImpl.doSome();
      }
+
+     @Test
+    public void test8(){
+         /**
+          * aop后置返回值通知
+          */
+         SomeService iSomeServiceImpl = (SomeService) ac.getBean("ISomeServiceImpl");
+         System.out.println("proxy:"+iSomeServiceImpl.getClass().getName());
+         iSomeServiceImpl.doAfter("a");
+     }
+
+
+    @Test
+    public void test9(){
+        /**
+         * aop 后置通知
+         */
+        SomeService iSomeServiceImpl = (SomeService) ac.getBean("ISomeServiceImpl");
+        System.out.println("proxy:"+iSomeServiceImpl.getClass().getName());
+        iSomeServiceImpl.doSome();
+    }
+
+    @Test
+    public void test10(){
+        /**
+         * aop环绕通知
+         */
+        SomeService iSomeServiceImpl = (SomeService) ac.getBean("ISomeServiceImpl");
+        System.out.println("proxy:"+iSomeServiceImpl.getClass().getName());
+        iSomeServiceImpl.doSome();
+    }
 }

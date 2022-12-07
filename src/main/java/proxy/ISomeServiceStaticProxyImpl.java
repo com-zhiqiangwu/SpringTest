@@ -16,4 +16,9 @@ public class ISomeServiceStaticProxyImpl implements SomeService {
         iSomeService.doSome();
         System.out.println("staticProxy:调用方法之后的动作");
     }
+
+    @Override
+    public String doAfter(String str) {
+        return null;
+    }
 }
