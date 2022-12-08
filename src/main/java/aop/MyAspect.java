@@ -40,10 +40,12 @@ public class MyAspect {
     }
 
 
-    @Around(value = "execution(* *..ISomeServiceImpl.doSome())")
-    public void myAround(ProceedingJoinPoint pjp) throws Throwable{
+    @Around(value = "execution(* *..ISomeServiceImpl.doAfter(..))")
+    public Object myAround(ProceedingJoinPoint pjp) throws Throwable{
+        Object obj = null;
         System.out.println("环绕通知：切面功能：执行方法之前输出当前时间"+new Date());
-        pjp.proceed();
+        obj  =  pjp.proceed();
         System.out.println("环绕通知：切面功能：执行方法之后输出当前时间"+new Date());
+        return  obj;
     }
 }

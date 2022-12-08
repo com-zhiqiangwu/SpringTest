@@ -105,7 +105,7 @@ public class MyTest {
     @Test
     public void test9(){
         /**
-         * aop 后置通知
+         * aop 最终通知
          */
         SomeService iSomeServiceImpl = (SomeService) ac.getBean("ISomeServiceImpl");
         System.out.println("proxy:"+iSomeServiceImpl.getClass().getName());
@@ -119,6 +119,7 @@ public class MyTest {
          */
         SomeService iSomeServiceImpl = (SomeService) ac.getBean("ISomeServiceImpl");
         System.out.println("proxy:"+iSomeServiceImpl.getClass().getName());
-        iSomeServiceImpl.doSome();
+        String around = iSomeServiceImpl.doAfter("around");
+        System.out.println(around);
     }
 }

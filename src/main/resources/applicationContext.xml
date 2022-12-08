@@ -84,5 +84,5 @@
 
 <!--切面类-->
    <bean id="MyAspect" class="aop.MyAspect"></bean>
-        <aop:aspectj-autoproxy/>
+        <aop:aspectj-autoproxy />
 </beans>
