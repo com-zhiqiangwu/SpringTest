@@ -11,6 +11,7 @@ import service.SomeService;
 import service.impl.ISomeServiceImpl;
 
 import java.lang.reflect.Proxy;
+import java.util.Scanner;
 
 public class MyTest {
     private  static final String xml = "applicationContext.xml";
@@ -121,5 +122,12 @@ public class MyTest {
         System.out.println("proxy:"+iSomeServiceImpl.getClass().getName());
         String around = iSomeServiceImpl.doAfter("around");
         System.out.println(around);
+        System.out.println(3 % 8);
+    }
+
+    @Test
+    public void test11(){
+        Teacher teacher = new Teacher();
+        teacher.changeNumToChinese("6000200");
     }
 }
