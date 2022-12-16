@@ -1,11 +1,16 @@
 import com.designmode.test.easyfactorymode.Pizza;
 import com.designmode.test.easyfactorymode.PizzaFactory;
 import com.designmode.test.easyfactorymode.PizzaStore;
+import com.designmode.test.iteratormode.Book;
+import com.designmode.test.iteratormode.BookShelf;
+import com.designmode.test.iteratormode.Iterator;
 import com.designmode.test.singletonmode.SingletonModeDoubleCheckLockLazyMan;
 import com.designmode.test.singletonmode.SingletonModeHungryMan;
 import com.designmode.test.singletonmode.SingletonModeLazyMan;
 import com.designmode.test.singletonmode.SingletonModeSynchronizedLazyMan;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 public class DesignModeTest {
 
@@ -80,5 +85,19 @@ public class DesignModeTest {
 
         //制作哈利披萨
         Pizza pizza1 = pizzaStore.makePizza("clam");
+    }
+
+    @Test
+    public void test6(){
+        BookShelf bookShelf = new BookShelf(4);
+        bookShelf.appendBook("A");
+        bookShelf.appendBook("B");
+        bookShelf.appendBook("C");
+        bookShelf.appendBook("D");
+        Iterator iterator = bookShelf.iterator();
+        while (iterator.hasNext()){
+            Book next = (Book) iterator.next();
+            System.out.println(next.getName());
+        }
     }
 }
