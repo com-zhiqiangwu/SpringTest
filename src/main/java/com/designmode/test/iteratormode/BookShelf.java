@@ -1,27 +1,30 @@
 package com.designmode.test.iteratormode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BookShelf implements Arrgegate{
-    private Book[] books;
+    private List<Book> bookList;
     private int last = 0;
 
     public BookShelf(int maxSize) {
-        this.books = new Book[maxSize];
+        this.bookList = new ArrayList(maxSize);
     }
 
     public Book getBookAt(int index){
-        if (index<0&&index>books.length){
+        if (index<0&&index>bookList.size()){
             System.out.println("书架这个位置没有书");
         }
-        return  books[index];
+        return  bookList.get(index);
     }
 
     public void appendBook(String name){
-        books[last] = new Book(name);
+        bookList.add(new Book(name));
         this.last++;
     }
 
     public int getLength(){
-        return books.length;
+        return bookList.size();
     }
 
     @Override

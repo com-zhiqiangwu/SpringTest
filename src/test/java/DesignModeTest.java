@@ -87,6 +87,7 @@ public class DesignModeTest {
         Pizza pizza1 = pizzaStore.makePizza("clam");
     }
 
+    //迭代模式
     @Test
     public void test6(){
         BookShelf bookShelf = new BookShelf(4);
@@ -94,6 +95,7 @@ public class DesignModeTest {
         bookShelf.appendBook("B");
         bookShelf.appendBook("C");
         bookShelf.appendBook("D");
+        bookShelf.appendBook("E");
         Iterator iterator = bookShelf.iterator();
         while (iterator.hasNext()){
             Book next = (Book) iterator.next();
