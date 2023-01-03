@@ -1,4 +1,4 @@
-package com.designmode.test.iteratormode;
+package com.test.designmode.iteratormode;
 
 import java.util.ArrayList;
 import java.util.List;

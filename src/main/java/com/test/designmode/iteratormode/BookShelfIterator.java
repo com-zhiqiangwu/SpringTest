@@ -1,4 +1,4 @@
-package com.designmode.test.iteratormode;
+package com.test.designmode.iteratormode;
 
 public class BookShelfIterator implements Iterator{
     private BookShelf bookShelf;

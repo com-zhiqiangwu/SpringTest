@@ -1,16 +1,14 @@
-import com.designmode.test.easyfactorymode.Pizza;
-import com.designmode.test.easyfactorymode.PizzaFactory;
-import com.designmode.test.easyfactorymode.PizzaStore;
-import com.designmode.test.iteratormode.Book;
-import com.designmode.test.iteratormode.BookShelf;
-import com.designmode.test.iteratormode.Iterator;
-import com.designmode.test.singletonmode.SingletonModeDoubleCheckLockLazyMan;
-import com.designmode.test.singletonmode.SingletonModeHungryMan;
-import com.designmode.test.singletonmode.SingletonModeLazyMan;
-import com.designmode.test.singletonmode.SingletonModeSynchronizedLazyMan;
+import com.test.designmode.easyfactorymode.Pizza;
+import com.test.designmode.easyfactorymode.PizzaFactory;
+import com.test.designmode.easyfactorymode.PizzaStore;
+import com.test.designmode.iteratormode.Book;
+import com.test.designmode.iteratormode.BookShelf;
+import com.test.designmode.iteratormode.Iterator;
+import com.test.designmode.singletonmode.SingletonModeDoubleCheckLockLazyMan;
+import com.test.designmode.singletonmode.SingletonModeHungryMan;
+import com.test.designmode.singletonmode.SingletonModeLazyMan;
+import com.test.designmode.singletonmode.SingletonModeSynchronizedLazyMan;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 public class DesignModeTest {
 

@@ -1,4 +1,4 @@
-package com.designmode.test.easyfactorymode;
+package com.test.designmode.easyfactorymode;
 
 public  interface Pizza {
 

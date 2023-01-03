@@ -1,5 +1,5 @@
 
-package com.designmode.test.singletonmode;
+package com.test.designmode.singletonmode;
 
 public class SingletonModeHungryMan {
     private static SingletonModeHungryMan singletonMode = new SingletonModeHungryMan();

@@ -1,4 +1,4 @@
-package com.designmode.test.singletonmode;
+package com.test.designmode.singletonmode;
 
 public class SingletonModeLazyMan {
     private static SingletonModeLazyMan singletonModeLazyMan = null;
