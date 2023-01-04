@@ -8,4 +8,9 @@ public class GenericityClass<T>{
     public T getValue(){
         return this.value;
     }
+
+    public <Number> Number showValue(GenericityClass<? extends Number> obj){
+        System.out.println(obj.getValue());
+        return obj.getValue();
+    }
 }

@@ -63,4 +63,13 @@ public class Genericity {
         System.out.println(integerGenericityClass.getClass().equals(stringGenericityClass.getClass()));
     }
 
+    //类型通配符,泛型方法
+    @Test
+    public void test5(){
+        //当showValue方法没有设定类型通配符上限时，编译报错，设置类型通配符上限为number时，Integer是number子类，编译不会报错
+        GenericityClass<Integer> integerGenericityClass = new GenericityClass<>(123);
+        Integer integer = integerGenericityClass.showValue(integerGenericityClass);
+        System.out.println(integer);
+    }
+
 }
