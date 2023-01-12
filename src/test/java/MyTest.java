@@ -11,6 +11,7 @@ import service.SomeService;
 import service.impl.ISomeServiceImpl;
 
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MyTest {
@@ -130,4 +131,6 @@ public class MyTest {
         Teacher teacher = new Teacher();
         teacher.changeNumToChinese("6000200");
     }
+
+
 }
