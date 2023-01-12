@@ -1,3 +1,5 @@
+package test.designmode;
+
 import com.test.designmode.easyfactorymode.Pizza;
 import com.test.designmode.easyfactorymode.PizzaFactory;
 import com.test.designmode.easyfactorymode.PizzaStore;

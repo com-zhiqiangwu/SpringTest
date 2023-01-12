@@ -1,3 +1,5 @@
+package test.genericity;
+
 import com.test.genericity.genericityclass.GenericityClass;
 import com.test.genericity.genericityinterface.GenericityTest;
 import com.test.genericity.genericityinterface.GenericityTest1;

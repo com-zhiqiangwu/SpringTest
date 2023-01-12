@@ -1,3 +1,5 @@
+package test.reflect;
+
 import com.sun.org.apache.bcel.internal.generic.LoadClass;
 import com.test.reflect.Reflect;
 import org.junit.Test;

@@ -1,5 +1,6 @@
+package test.io;
+
 import org.junit.Test;
-import org.springframework.orm.jpa.vendor.EclipseLinkJpaDialect;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
