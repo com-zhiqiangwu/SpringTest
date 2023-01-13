@@ -6,7 +6,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-public class IO {
+public class IOTest {
 
     /**
      * 定义文件路径时，注意：可以用“/”或者“\”。

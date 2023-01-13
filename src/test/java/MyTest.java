@@ -12,6 +12,7 @@ import service.impl.ISomeServiceImpl;
 
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MyTest {
@@ -126,11 +127,24 @@ public class MyTest {
         System.out.println(3 % 8);
     }
 
+    //数字转中文
     @Test
     public void test11(){
         Teacher teacher = new Teacher();
         teacher.changeNumToChinese("6000200");
     }
 
+    @Test
+    public void test12(){
+        List list = new ArrayList<>();
+        ArrayList<Integer> arrayList = new ArrayList<Integer>(){
+            {
+                add(1);
+                add(2);
+                add(3);
+            }
+        };
+
+    }
 
 }

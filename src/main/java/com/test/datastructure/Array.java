@@ -1,14 +1,15 @@
-package test.arithmetic;
+package com.test.datastructure;
 
-import org.junit.Test;
+
+
 
 import java.util.Arrays;
 
-public class ArrayArithmetic {
+public class Array {
+
+    public static void main(String[] args) {
 
     //数组插入数据
-    @Test
-    public void test1(){
 
         System.out.println("################################尾部插入################");
         //1.尾部插入-数组元素未超过数组长度定义
@@ -52,13 +53,15 @@ public class ArrayArithmetic {
         }
         System.out.println(Arrays.toString(intArr));
         //数组元素个数达到数组最大长度
-       if (size>=intArr.length){
-           int[] intNew = new int[10 * 2];//扩容二倍
-           System.arraycopy(intArr,0,intNew,0,intArr.length);
-           intArr = intNew;
-           System.out.println(Arrays.toString(intNew));
-           System.out.println(Arrays.toString(intArr));
-       }
+        if (size>=intArr.length){
+            int[] intNew = new int[10 * 2];//扩容二倍
+            System.arraycopy(intArr,0,intNew,0,intArr.length);//复制数组:按顺序参数说明:原数组-原数组从哪开始复制-目标数组-复制到目标数组从哪开始-复制原数组多长
+            intArr = intNew;
+            System.out.println(Arrays.toString(intNew));
+            System.out.println(Arrays.toString(intArr));
+        }
+        intArr[11] = 11;
+        System.out.println(Arrays.toString(intArr));
 
     }
 }

@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-public class Genericity {
+public class GenericityTest {
 
     //1.什么是泛型？ 参数化类型
     @Test
@@ -45,7 +45,7 @@ public class Genericity {
     @Test
     public void test3(){
         //1.未指定具体泛型类型
-        GenericityTest<Integer> objectGenericityTest = new GenericityTest<>();
+        com.test.genericity.genericityinterface.GenericityTest<Integer> objectGenericityTest = new com.test.genericity.genericityinterface.GenericityTest<>();
         objectGenericityTest.print(100);
 
         //2.指定了泛型类型

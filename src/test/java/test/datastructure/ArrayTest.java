@@ -1,15 +1,14 @@
-package com.test.arithmetic.array;
+package test.datastructure;
 
-
-
+import org.junit.Test;
 
 import java.util.Arrays;
 
-public class ArrayArithmetic {
-
-    public static void main(String[] args) {
+public class ArrayTest {
 
     //数组插入数据
+    @Test
+    public void test1(){
 
         System.out.println("################################尾部插入################");
         //1.尾部插入-数组元素未超过数组长度定义
@@ -53,15 +52,35 @@ public class ArrayArithmetic {
         }
         System.out.println(Arrays.toString(intArr));
         //数组元素个数达到数组最大长度
-        if (size>=intArr.length){
-            int[] intNew = new int[10 * 2];//扩容二倍
-            System.arraycopy(intArr,0,intNew,0,intArr.length);//复制数组:按顺序参数说明:原数组-原数组从哪开始复制-目标数组-复制到目标数组从哪开始-复制原数组多长
-            intArr = intNew;
-            System.out.println(Arrays.toString(intNew));
-            System.out.println(Arrays.toString(intArr));
+       if (size>=intArr.length){
+           int[] intNew = new int[10 * 2];//扩容二倍
+           System.arraycopy(intArr,0,intNew,0,intArr.length);
+           intArr = intNew;
+           System.out.println(Arrays.toString(intNew));
+           System.out.println(Arrays.toString(intArr));
+       }
+
+        System.out.println("################################删除数组################");
+       int sizeDel = 0;
+        int[] intDel = new int[10];
+        for (int i = 0; i < 10; i++) {
+            intDel[i]=i+1;
+            sizeDel++;
         }
-        intArr[11] = 11;
-        System.out.println(Arrays.toString(intArr));
+        System.out.println("定义删除数组"+Arrays.toString(intDel));
+
+        int delIndex = 3;//要删除元素的下标
+        if (delIndex<0|| delIndex>intDel.length){
+            System.out.println("删除数组下标越界，请重新定义数组下标");
+        }else {
+            for (int i = delIndex; i <intDel.length ; i++) {
+                intDel[i-1]= intDel[i];
+                intDel[i] = 0;
+                System.out.println("####"+Arrays.toString(intDel));
+            }
+            System.out.println("删除后数组："+Arrays.toString(intDel));
+        }
+
 
     }
 }
