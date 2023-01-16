@@ -1,6 +1,6 @@
 package com.test.datastructure;
 
-    public class MyLinkedList {
+public class MyLinkedList {
 
         class Node{
             public int data;//数据
@@ -28,6 +28,8 @@ package com.test.datastructure;
         private int size;//链表元素个数
         private Node head;//头节点
         private Node last;//尾节点
+
+        private int data;//节点数据
 
         /**
          * 链表中添加元素
@@ -110,6 +112,26 @@ package com.test.datastructure;
             return tempNode;
         }
 
+        /**
+         * 更新链表
+         * @param index  要修改的位置
+         * @param newElement  要更新后的元素
+         */
+        public int updateNode(int index,int newElement){
+
+            if(index < 0 || index > size){
+                System.out.println("updateNode-index参数："+index+"超出链表范围！");
+            }
+            int old;
+            //获取要修改节点前置节点
+            Node proNode = getNode(index);
+            Node updateNode = proNode.next;//要修改的节点
+            old=updateNode.data;//旧元素
+            updateNode.data = newElement;//将节点数据赋值新数据
+            proNode.next=updateNode;
+            return old;
+        }
+
 
         /**
          * 打印链表
@@ -125,4 +147,12 @@ package com.test.datastructure;
                 temp=temp.next;
             }
         }
+
+    public int getData() {
+        return data;
     }
+
+    public void setData(int data) {
+        this.data = data;
+    }
+}
