@@ -3,6 +3,8 @@ package test.datastructure;
 import com.test.datastructure.LoopQueen;
 import org.junit.Test;
 
+import java.util.HashMap;
+
 public class LoopQueenTest {
 
     @Test
@@ -32,5 +34,12 @@ public class LoopQueenTest {
         int dequeen4 = loopQueen.dequeen();
         System.out.println(dequeen4);
 
+    }
+
+    @Test
+    public void test2(){
+        HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
+        System.out.println(1<<30);
+        System.out.println( );
     }
 }
