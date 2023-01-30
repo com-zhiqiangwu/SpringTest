@@ -64,3 +64,112 @@ unreachable：对象不可通过上面两种途径可达
 
 (9)注：System.runFinalizersOnExit()等方法可以使对象即使处于reachable状态，JVM仍对其执行finalize方法
 
+三.finally
+1.如何实现finally总被执行
+将finally中的代码块复制到try以及catch代码块中
+
+2.finally任何情况下都会执行吗
+不是的，以下情况finally不会执行
+jvm停止运行
+比如调用system.exit()或者Runtime.getRuntime().halt();
+
+执行try或catch代码的线程被中断或杀死
+比如守护线程刚开始执行到 finally 代码块，此时没有任何其他非守护线程，那么虚拟机将退出，此时 JVM 不会等待守护线程的 finally 代码块执行完成
+
+try代码块中无限循环或者执行不到try代码块
+
+3.finally的执行顺序
+finally语句块是在return执行后，返回前执行的，在循环被跳过（continue）和中断（break）之前被执行的。
+
+1、不管有没有出现异常，finally块中代码都会执行；
+2、当try和catch中有return时，finally仍然会执行；
+3、finally是在return后面的表达式运算后执行的（此时并没有返回运算后的值，而是先把要返回的值保存起来，不管finally中的代码怎么样，返回的值都不会改变，任然是之前保存的值），所以函数返回值是在finally执行前确定的；
+4、finally中最好不要包含return，否则程序会提前退出，返回值不是try或catch中保存的返回值。
+举例：
+情况1：try{} catch(){}finally{} return;
+显然程序按顺序执行。
+
+情况2:try{ return; }catch(){} finally{} return;
+程序执行try块中return之前（包括return语句中的表达式运算）代码；
+再执行finally块，最后执行try中return;
+finally块之后的语句return，因为程序在try中已经return所以不再执行。
+
+情况3:try{ } catch(){return;} finally{} return;
+程序先执行try，如果遇到异常执行catch块，
+有异常：则执行catch中return之前（包括return语句中的表达式运算）代码，再执行finally语句中全部代码，
+最后执行catch块中return. finally之后也就是4处的代码不再执行。
+无异常：执行完try再finally再return.
+
+情况4:try{ return; }catch(){} finally{return;}
+程序执行try块中return之前（包括return语句中的表达式运算）代码；
+再执行finally块，因为finally块中有return所以提前退出。
+
+情况5:try{} catch(){return;}finally{return;}
+程序执行catch块中return之前（包括return语句中的表达式运算）代码；
+再执行finally块，因为finally块中有return所以提前退出。
+
+情况6:try{ return;}catch(){return;} finally{return;}
+程序执行try块中return之前（包括return语句中的表达式运算）代码；
+有异常：执行catch块中return之前（包括return语句中的表达式运算）代码；
+则再执行finally块，因为finally块中有return所以提前退出。
+无异常：则再执行finally块，因为finally块中有return所以提前退出。
+
+最终结论：任何执行try 或者catch中的return语句之前，都会先执行finally语句，如果finally存在的话。
+如果finally中有return语句，那么程序就return了，所以finally中的return是一定会被return的，
+编译器把finally中的return实现为一个warning。
+
+四.String、StringBuffer与StringBuilder的区别？
+第一点: 可变和适用范围。String对象是不可变的，而StringBuffer和StringBuilder是可变字符序列。
+每次对String的操作相当于生成一个新的String对象，而对StringBuffer和StringBuilder的操作是对对象本身的操作，
+而不会生成新的对象，所以对于频繁改变内容的字符串避免使用String，因为频繁的生成对象将会对系统性能产生影响。
+
+第二点: 线程安全。String由于有final修饰，是immutable的，安全性是简单而纯粹的。
+StringBuilder和StringBuffer的区别在于StringBuilder不保证同步，也就是说如果需要线程安全需要使用StringBuffer，不需要同步的StringBuilder效率更高。
+
+五.接口与抽象类的区别？
+一个子类只能继承一个抽象类, 但能实现多个接口
+抽象类可以有构造方法, 接口没有构造方法
+抽象类可以有普通成员变量, 接口没有普通成员变量
+抽象类和接口都可有静态成员变量, 抽象类中静态成员变量访问类型任意，接口只能public static final(默认)
+抽象类可以没有抽象方法, 抽象类可以有普通方法；接口在JDK8之前都是抽象方法，在JDK8可以有default方法，在JDK9中允许有私有普通方法
+抽象类可以有静态方法；接口在JDK8之前不能有静态方法，在JDK8中可以有静态方法，且只能被接口类直接调用（不能被实现类的对象调用）
+抽象类中的方法可以是public、protected; 接口方法在JDK8之前只有public abstract，在JDK8可以有default方法，在JDK9中允许有private方法
+
+六.this() & super()在构造方法中的区别？
+调用super()必须写在子类构造方法的第一行, 否则编译不通过
+super从子类调用父类构造, this在同一类中调用其他构造均需要放在第一行
+尽管可以用this调用一个构造器, 却不能调用2个
+this和super不能出现在同一个构造器中, 否则编译不通过
+this()、super()都指的对象,不可以在static环境中使用
+本质this指向本对象的指针。super是一个关键字
+
+七.Java移位运算符？
+java中有三种移位运算符
+
+1.<< :左移运算符,x << 1,相当于x乘以2(不溢出的情况下),低位补0
+2.>>:带符号右移,x >> 1,相当于x除以2,正数高位补0,负数高位补1
+3.>>> :无符号右移,忽略符号位,空位都以0补
+
+八.泛型
+1.泛型方法如何定义使用
+![img_1.png](img_1.png)
+2.调用泛型方法语法格式
+![img_2.png](img_2.png)
+说明一下，定义泛型方法时，必须在返回值前边加一个，来声明这是一个泛型方法，持有一个泛型T，然后才可以用泛型T作为方法的返回值。
+
+Class的作用就是指明泛型的具体类型，而Class类型的变量c，可以用来创建泛型类的对象。
+
+为什么要用变量c来创建对象呢？既然是泛型方法，就代表着我们不知道具体的类型是什么，也不知道构造方法如何，因此没有办法去new一个对象，但可以利用变量c的newInstance方法去创建对象，也就是利用反射创建对象。
+
+泛型方法要求的参数是Class类型，而Class.forName()方法的返回值也是Class，因此可以用Class.forName()作为参数。其中，forName()方法中的参数是何种类型，返回的Class就是何种类型。在本例中，forName()方法中传入的是User类的完整路径，因此返回的是Class类型的对象，因此调用泛型方法时，变量c的类型就是Class，因此泛型方法中的泛型T就被指明为User，因此变量obj的类型为User。
+
+当然，泛型方法不是仅仅可以有一个参数Class，可以根据需要添加其他参数。
+
+为什么要使用泛型方法呢？ 因为泛型类要在实例化的时候就指明类型，如果想换一种类型，不得不重新new一次，可能不够灵活；而泛型方法可以在调用的时候指明类型，更加灵活
+
+
+3.如何理解Java中的泛型是伪泛型？
+泛型中类型擦除 Java泛型这个特性是从JDK 1.5才开始加入的，因此为了兼容之前的版本，Java泛型的实现采取了“伪泛型”的策略，即Java在语法上支持泛型，但是在编译阶段会进行所谓的“类型擦除”（Type Erasure），将所有的泛型表示（尖括号中的内容）都替换为具体的类型（其对应的原生态类型），就像完全没有泛型一样。
+————————————————
+
+
