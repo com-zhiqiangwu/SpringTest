@@ -27,6 +27,10 @@ public class ReflectTest {
             //4.
             Class<?> aClass2 = ClassLoader.getSystemClassLoader().loadClass("com.test.reflect.Reflect");
             System.out.println(aClass == reflectClass && reflectClass == aClass1 && aClass1 == aClass2);
+
+            System.out.println(aClass.getSimpleName());//只获取类名
+            System.out.println(aClass.getName());//类的全限定名，jvm中Class的表示，可以用于动态加载Class对象，例如Class.forName。
+            System.out.println(aClass.getCanonicalName());//返回更容易理解的表示，主要用于输出（toString）或log打印，大多数情况下和getName一样，但是在内部类、数组等类型的表示形式就不同了。
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

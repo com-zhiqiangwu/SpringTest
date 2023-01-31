@@ -169,7 +169,86 @@ Class的作用就是指明泛型的具体类型，而Class类型的变量c，可
 
 
 3.如何理解Java中的泛型是伪泛型？
-泛型中类型擦除 Java泛型这个特性是从JDK 1.5才开始加入的，因此为了兼容之前的版本，Java泛型的实现采取了“伪泛型”的策略，即Java在语法上支持泛型，但是在编译阶段会进行所谓的“类型擦除”（Type Erasure），将所有的泛型表示（尖括号中的内容）都替换为具体的类型（其对应的原生态类型），就像完全没有泛型一样。
-————————————————
+泛型中类型擦除 Java泛型这个特性是从JDK 1.5才开始加入的，因此为了兼容之前的版本，Java泛型的实现采取了“伪泛型”的策略，
+即Java在语法上支持泛型，但是在编译阶段会进行所谓的“类型擦除”（Type Erasure），将所有的泛型表示（尖括号中的内容）都替换为具体的类型（其对应的原生态类型），
+就像完全没有泛型一样。
+
+八.注解的作用？
+注解是JDK1.5版本开始引入的一个特性，用于对代码进行说明，可以对包、类、接口、字段、方法参数、局部变量等进行注解。它主要的作用有以下四方面：
+
+生成文档，通过代码里标识的元数据生成javadoc文档。
+编译检查，通过代码里标识的元数据让编译器在编译期间进行检查验证。
+编译时动态处理，编译时通过代码里标识的元数据动态处理，例如动态生成代码。
+运行时动态处理，运行时通过代码里标识的元数据动态处理，例如使用反射注入实例。
+注解的常见分类？
+Java自带的标准注解，包括@Override、@Deprecated和@SuppressWarnings，分别用于标明重写某个方法、标明某个类或方法过时、标明要忽略的警告，用这些注解标明后编译器就会进行检查。
+
+元注解，元注解是用于定义注解的注解，包括@Retention、@Target、@Inherited、@Documented
+
+@Retention用于标明注解被保留的阶段
+@Target用于标明注解使用的范围
+@Inherited用于标明注解可继承
+@Documented用于标明是否生成javadoc文档
+自定义注解，可以根据自己的需求定义注解，并可用元注解对自定义注解进行注解。
+
+九.异常
+     1.Java异常类层次结构?
+
+     Throwable 是 Java 语言中所有错误与异常的超类。
+     Error 类及其子类：程序中无法处理的错误，表示运行应用程序中出现了严重的错误。 
+     Exception 程序本身可以捕获并且可以处理的异常。Exception 这种异常又分为两类：运行时异常和编译时异常
+![img_3.png](img_3.png)
+     运行时异常
+     都是RuntimeException类及其子类异常，如NullPointerException(空指针异常)、IndexOutOfBoundsException(下标越界异常)等，
+     这些异常是不检查异常，程序中可以选择捕获处理，也可以不处理。这些异常一般是由程序逻辑错误引起的，程序应该从逻辑角度尽可能避免这类异常的发生。
+     运行时异常的特点是Java编译器不会检查它，也就是说，当程序中可能出现这类异常，即使没有用try-catch语句捕获它，也没有用throws子句声明抛出它，也会编译通过。
+
+     非运行时异常 （编译异常）
+     是RuntimeException以外的异常，类型上都属于Exception类及其子类。从程序语法角度讲是必须进行处理的异常，如果不处理，
+     程序就不能编译通过。如IOException、SQLException等以及用户自定义的Exception异常，一般情况下不自定义检查异常。
+
+十.反射
+JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；
+这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制.
+![img_4.png](img_4.png)
+
+十一.SPI机制
+SPI（Service Provider Interface），是JDK内置的一种 服务提供发现机制，可以用来启用框架扩展和替换组件，主要是被框架的开发人员使用，比如java.sql.Driver接口，
+其他不同厂商可以针对同一接口做出不同的实现，MySQL和PostgreSQL都有不同的实现提供给用户，而Java的SPI机制可以为某个接口寻找服务实现。
+Java中SPI机制主要思想是将装配的控制权移到程序之外，在模块化设计中这个机制尤其重要，其核心思想就是 解耦。
+
+SPI整体机制图如下：
+![img_5.png](img_5.png)
+当服务的提供者提供了一种接口的实现之后，需要在classpath下的META-INF/services/目录里创建一个以服务接口命名的文件，这个文件里的内容就是这个接口的具体的实现类。当其他的程序需要这个服务的时候，
+就可以通过查找这个jar包（一般都是以jar包做依赖）的META-INF/services/中的配置文件，配置文件中有接口的具体实现类名，可以根据这个类名进行加载实例化，就可以使用该服务了。
+JDK中查找服务的实现的工具类是：java.util.ServiceLoader。
+
+SPI机制的应用？
+SPI机制 - JDBC DriverManager
+
+在JDBC4.0之前，我们开发有连接数据库的时候，通常会用Class.forName(“com.mysql.jdbc.Driver”)这句先加载数据库相关的驱动，然后再进行获取连接等的操作。而JDBC4.0之后不需要用Class.forName(“com.mysql.jdbc.Driver”)来加载驱动，直接获取连接就可以了，现在这种方式就是使用了Java的SPI扩展机制来实现。
+
+JDBC接口定义
+
+首先在java中定义了接口java.sql.Driver，并没有具体的实现，具体的实现都是由不同厂商来提供的。
+
+mysql实现
+
+在mysql的jar包mysql-connector-java-6.0.6.jar中，可以找到META-INF/services目录，该目录下会有一个名字为java.sql.Driver的文件，文件内容是com.mysql.cj.jdbc.Driver，这里面的内容就是针对Java中定义的接口的实现。
+
+postgresql实现
+
+同样在postgresql的jar包postgresql-42.0.0.jar中，也可以找到同样的配置文件，文件内容是org.postgresql.Driver，这是postgresql对Java的java.sql.Driver的实现。
+
+使用方法
+
+上面说了，现在使用SPI扩展来加载具体的驱动，我们在Java中写连接数据库的代码的时候，不需要再使用Class.forName(“com.mysql.jdbc.Driver”)来加载驱动了，
+而是直接使用如下代码：
+Connection conn = DriverManager.getConnection(url,username,password);
+
+
+
+
+
 
 
