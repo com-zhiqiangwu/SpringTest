@@ -269,6 +269,8 @@ postgresql实现
 `Connection conn = DriverManager.getConnection(url,username,password);`
 
 
+[全站知识体系] (https://blog.csdn.net/grd_java/article/details/123249685?spm=1001.2101.3001.6650.9&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EOPENSEARCH%7ERate-9-123249685-blog-126948238.pc_relevant_3mothn_strategy_and_data_recovery&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EOPENSEARCH%7ERate-9-123249685-blog-126948238.pc_relevant_3mothn_strategy_and_data_recovery&utm_relevant_index=10)
+
 
 
 
