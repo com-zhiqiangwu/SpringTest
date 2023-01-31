@@ -266,7 +266,7 @@ postgresql实现
 
      上面说了，现在使用SPI扩展来加载具体的驱动，我们在Java中写连接数据库的代码的时候，不需要再使用Class.forName(“com.mysql.jdbc.Driver”)来加载驱动了，
      而是直接使用如下代码：
-     `Connection conn = DriverManager.getConnection(url,username,password);`
+`Connection conn = DriverManager.getConnection(url,username,password);`
 
 
 
