@@ -1,4 +1,5 @@
 一、final
+
 1.final关键字可以用来修饰类、方法、变量。各有不同。
 
 A、修饰类(class)。
@@ -198,6 +199,7 @@ Java自带的标准注解，包括@Override、@Deprecated和@SuppressWarnings，
      Error 类及其子类：程序中无法处理的错误，表示运行应用程序中出现了严重的错误。 
      Exception 程序本身可以捕获并且可以处理的异常。Exception 这种异常又分为两类：运行时异常和编译时异常
 ![img_3.png](img_3.png)
+
      运行时异常
      都是RuntimeException类及其子类异常，如NullPointerException(空指针异常)、IndexOutOfBoundsException(下标越界异常)等，
      这些异常是不检查异常，程序中可以选择捕获处理，也可以不处理。这些异常一般是由程序逻辑错误引起的，程序应该从逻辑角度尽可能避免这类异常的发生。
