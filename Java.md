@@ -1,5 +1,11 @@
 ## java基础知识
 
+[全站知识体系](https://blog.csdn.net/grd_java/article/details/123249685?spm=1001.2101.3001.6650.9&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EOPENSEARCH%7ERate-9-123249685-blog-126948238.pc_relevant_3mothn_strategy_and_data_recovery&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EOPENSEARCH%7ERate-9-123249685-blog-126948238.pc_relevant_3mothn_strategy_and_data_recovery&utm_relevant_index=10)
+
+[OAUTH2](https://blog.csdn.net/qq_31211493/article/details/123546530)
+
+[图解OAUTH2](https://blog.csdn.net/qq_31960623/article/details/121055788?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-121055788-blog-123546530.pc_relevant_recovery_v2&spm=1001.2101.3001.4242.1&utm_relevant_index=3)
+
 
 ### **一、final**
 
@@ -270,13 +276,6 @@ postgresql实现
      上面说了，现在使用SPI扩展来加载具体的驱动，我们在Java中写连接数据库的代码的时候，不需要再使用Class.forName(“com.mysql.jdbc.Driver”)来加载驱动了，
      而是直接使用如下代码：
 `Connection conn = DriverManager.getConnection(url,username,password);`
-
-
-[全站知识体系](https://blog.csdn.net/grd_java/article/details/123249685?spm=1001.2101.3001.6650.9&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EOPENSEARCH%7ERate-9-123249685-blog-126948238.pc_relevant_3mothn_strategy_and_data_recovery&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EOPENSEARCH%7ERate-9-123249685-blog-126948238.pc_relevant_3mothn_strategy_and_data_recovery&utm_relevant_index=10)
-
-[OAUTH2](https://blog.csdn.net/qq_31211493/article/details/123546530)
-
-[图解OAUTH2](https://blog.csdn.net/qq_31960623/article/details/121055788?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-121055788-blog-123546530.pc_relevant_recovery_v2&spm=1001.2101.3001.4242.1&utm_relevant_index=3)
 
 
 ### **十二.请求转发和重定向的区别**
