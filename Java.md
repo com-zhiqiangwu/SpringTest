@@ -1,7 +1,7 @@
 ##java基础知识
 
 
-###**一、final**
+### **一、final**
 
 1.final关键字可以用来修饰类、方法、变量。各有不同。
 
@@ -25,7 +25,7 @@
 
 2、final关键字不能用来抽象类和接口。
 
-###**二、finalize**
+### **二、finalize**
 
      Java 技术允许使用 finalize() 方法在垃圾收集器将对象从内存中清除出去之前做必要的清理工作。
      这个方法是由垃圾收集器在确定这个对象没有被引用时对这个对象调用的，但是什么时候调用 finalize 没有保证。
@@ -71,7 +71,7 @@ unreachable：对象不可通过上面两种途径可达
 
      (9)注：System.runFinalizersOnExit()等方法可以使对象即使处于reachable状态，JVM仍对其执行finalize方法
 
-###**三.finally**
+### **三.finally**
 1.如何实现finally总被执行
 
      将finally中的代码块复制到try以及catch代码块中
@@ -131,7 +131,7 @@ unreachable：对象不可通过上面两种途径可达
      如果finally中有return语句，那么程序就return了，所以finally中的return是一定会被return的，
      编译器把finally中的return实现为一个warning。
 
-###**四.String、StringBuffer与StringBuilder的区别？**
+### **四.String、StringBuffer与StringBuilder的区别？**
 
      第一点: 可变和适用范围。String对象是不可变的，而StringBuffer和StringBuilder是可变字符序列。
      每次对String的操作相当于生成一个新的String对象，而对StringBuffer和StringBuilder的操作是对对象本身的操作，
@@ -140,7 +140,7 @@ unreachable：对象不可通过上面两种途径可达
      第二点: 线程安全。String由于有final修饰，是immutable的，安全性是简单而纯粹的。
      StringBuilder和StringBuffer的区别在于StringBuilder不保证同步，也就是说如果需要线程安全需要使用StringBuffer，不需要同步的StringBuilder效率更高。
 
-###**五.接口与抽象类的区别？**
+### **五.接口与抽象类的区别？**
 
      一个子类只能继承一个抽象类, 但能实现多个接口
      抽象类可以有构造方法, 接口没有构造方法
@@ -150,7 +150,7 @@ unreachable：对象不可通过上面两种途径可达
      抽象类可以有静态方法；接口在JDK8之前不能有静态方法，在JDK8中可以有静态方法，且只能被接口类直接调用（不能被实现类的对象调用）
      抽象类中的方法可以是public、protected; 接口方法在JDK8之前只有public abstract，在JDK8可以有default方法，在JDK9中允许有private方法
 
-###**六.this() & super()在构造方法中的区别？**
+### **六.this() & super()在构造方法中的区别？**
 
      调用super()必须写在子类构造方法的第一行, 否则编译不通过
      super从子类调用父类构造, this在同一类中调用其他构造均需要放在第一行
@@ -159,14 +159,14 @@ unreachable：对象不可通过上面两种途径可达
      this()、super()都指的对象,不可以在static环境中使用
      本质this指向本对象的指针。super是一个关键字
 
-###**七.Java移位运算符？**
+### **七.Java移位运算符？**
 java中有三种移位运算符
 
      1.<< :左移运算符,x << 1,相当于x乘以2(不溢出的情况下),低位补0
      2.>>:带符号右移,x >> 1,相当于x除以2,正数高位补0,负数高位补1
      3.>>> :无符号右移,忽略符号位,空位都以0补
 
-###**八.泛型**
+### **八.泛型**
 1.泛型方法如何定义使用
 ![img_1.png](img_1.png)
 2.调用泛型方法语法格式
@@ -191,7 +191,7 @@ java中有三种移位运算符
      即Java在语法上支持泛型，但是在编译阶段会进行所谓的“类型擦除”（Type Erasure），将所有的泛型表示（尖括号中的内容）都替换为具体的类型（其对应的原生态类型），
      就像完全没有泛型一样。
 
-###**八.注解的作用？**
+### **八.注解的作用？**
 
      注解是JDK1.5版本开始引入的一个特性，用于对代码进行说明，可以对包、类、接口、字段、方法参数、局部变量等进行注解。它主要的作用有以下四方面：
 
@@ -211,7 +211,7 @@ java中有三种移位运算符
      @Documented用于标明是否生成javadoc文档
 自定义注解，可以根据自己的需求定义注解，并可用元注解对自定义注解进行注解。
 
-###**九.异常**
+### **九.异常**
      1.Java异常类层次结构?
 
      Throwable 是 Java 语言中所有错误与异常的超类。
@@ -228,13 +228,13 @@ java中有三种移位运算符
      是RuntimeException以外的异常，类型上都属于Exception类及其子类。从程序语法角度讲是必须进行处理的异常，如果不处理，
      程序就不能编译通过。如IOException、SQLException等以及用户自定义的Exception异常，一般情况下不自定义检查异常。
 
-###**十.反射**
+### **十.反射**
 
      JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；
      这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制.
 ![img_4.png](img_4.png)
 
-###**十一.SPI机制**
+### **十一.SPI机制**
 
      SPI（Service Provider Interface），是JDK内置的一种 服务提供发现机制，可以用来启用框架扩展和替换组件，主要是被框架的开发人员使用，比如java.sql.Driver接口，
      其他不同厂商可以针对同一接口做出不同的实现，MySQL和PostgreSQL都有不同的实现提供给用户，而Java的SPI机制可以为某个接口寻找服务实现。
@@ -279,7 +279,7 @@ postgresql实现
 [图解OAUTH2](https://blog.csdn.net/qq_31960623/article/details/121055788?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-121055788-blog-123546530.pc_relevant_recovery_v2&spm=1001.2101.3001.4242.1&utm_relevant_index=3)
 
 
-###**十二.请求转发和重定向的区别**
+### **十二.请求转发和重定向的区别**
 
 请求转发和请求重定向主要区别，包含以下 5 点：
 
