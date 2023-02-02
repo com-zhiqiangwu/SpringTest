@@ -1,5 +1,5 @@
 ##java基础知识
-[finalize](#finalize)
+
 一、final
 
 1.final关键字可以用来修饰类、方法、变量。各有不同。
@@ -24,7 +24,7 @@
 
 2、final关键字不能用来抽象类和接口。
 
-####二、finalize
+二、finalize
 
      Java 技术允许使用 finalize() 方法在垃圾收集器将对象从内存中清除出去之前做必要的清理工作。
      这个方法是由垃圾收集器在确定这个对象没有被引用时对这个对象调用的，但是什么时候调用 finalize 没有保证。
@@ -278,5 +278,55 @@ postgresql实现
 [图解OAUTH2](https://blog.csdn.net/qq_31960623/article/details/121055788?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-121055788-blog-123546530.pc_relevant_recovery_v2&spm=1001.2101.3001.4242.1&utm_relevant_index=3)
 
 
+十二.请求转发和重定向的区别
 
+请求转发和请求重定向主要区别，包含以下 5 点：
 
+     1.定义不同
+     2.跳转方不同
+     3.数据共享不同
+     4.最终 URL 地址不同
+     5.代码实现不同
+     补充：转发的是同一次请求；重定向是两次不同请求
+详解：
+1.定义不同
+
+     请求转发（Forward）：发生在服务端程序内部，当服务器端收到一个客户端的请求之后，会先将请求，转发给目标地址，
+     再将目标地址返回的结果转发给客户端。而客户端对于这一切毫无感知的
+这就好比，张三（客户端）找李四（服务器端）借钱，
+而李四没钱，于是李四又去王五那借钱，并把钱借给了张三，整个过程中张三只借了一次款，剩下的事情都是李四完成的，这就是请求转发。 
+     
+     请求重定向（Redirect）：请求重定向指的是服务器端接收到客户端的请求之后，会给客户端返回了一个临时响应头，这个临时响应头中记录了，
+     客户端需要再次发送请求（重定向）的 URL 地址，客户端再收到了地址之后，会将请求发送到新的地址上，这就是请求重定向。
+这就好像张三（客户端）找李四（服务器端）借钱，李四没钱，于是李四就告诉张三，“我没钱，你去王五那借“，于是张三又去王五家借到了钱，这就是请求重定向。
+
+2.请求方不同
+
+     从上面请求转发和请求重定向的定义，我们可以看出：请求转发是服务器端的行为，服务器端代替客户端发送请求，并将结果返回给客户端；而请求重定向是客户端的行为，它们的交互流程，如下图所示：
+![img_6.png](img_6.png)
+![img_7.png](img_7.png)
+
+3.数据共享不同
+
+     请求转发是服务器端实现的，所以整个执行流程中，客户端（浏览器端）只需要发送一次请求，因此整个交互过程中使用的都是同一个 Request 
+     请求对象和一个 Response 响应对象，所以整个请求过程中，请求和返回的数据是共享的；而请求重定向客户端发送两次完全不同的请求，所以两次请求中的数据是不同的。
+
+4.最终URL地址不同
+
+     请求转发是服务器端代为请求，再将结果返回给客户端的，所以整个请求的过程中 URL 地址是不变的；而请求重定向是服务器端告诉客户端，“你去另一个地访问去”，
+     所以浏览器会重新再发送一次请求，因此客户端最终显示的 URL 也为最终跳转的地址，而非刚开始请求的地址，所以 URL 地址发生了改变。
+
+5.代码实现不同
+在 SpringBoot 中，请求转发的实现代码如下：
+
+     @RequestMapping("/fw")
+     public void forward(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+     request.getRequestDispatcher("/index.html").forward(request, response);
+     }
+
+而请求重定向的实现代码如下：
+
+     @RequestMapping("/rt")
+     public void redirect(HttpServletRequest request, HttpServletResponse response) throws IOException {
+     response.sendRedirect("/index.html");
+     }
