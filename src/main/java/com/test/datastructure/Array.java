@@ -51,9 +51,10 @@ public class Array {
         if (delIndex<0|| delIndex>intDel.length){
             System.out.println("删除数组下标越界，请重新定义数组下标");
         }else {
-            for (int i = delIndex; i <intDel.length ; i++) {
-                intDel[i-1]= intDel[i];
-                intDel[i] = 0;
+            intDel[delIndex]= 0;
+            for (int i = delIndex; i <intDel.length-1 ; i++) {
+                intDel[i]= intDel[i+1];
+                intDel[i+1] = 0;
                 System.out.println("####"+Arrays.toString(intDel));
             }
             System.out.println("删除后数组："+Arrays.toString(intDel));
