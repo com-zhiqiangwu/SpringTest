@@ -331,3 +331,89 @@ postgresql实现
      public void redirect(HttpServletRequest request, HttpServletResponse response) throws IOException {
      response.sendRedirect("/index.html");
      }
+
+### **十三.请求转发和重定向的区别**
+1、什么是死锁
+
+    多个进程或线程互相等待对方的资源，在得到新的资源之前不会释放自己的资源，这样就形成了循环等待，这种现象被称为死锁。
+2、产生死锁的四大必要条件
+
+    资源互斥：资源只有两种状态，只有可用和不可用两状态，不能同时使用，同一时刻只能被一个进程或线程使用。
+
+    占有且请求：已经得到资源的进程或线程，继续请求新的资源，并持续占有旧的资源。
+
+    资源不可剥夺：资源已经分配进程或线程后，不能被其它进程或线程强制性获取，除非资源的占有者主动释放。
+
+    环路等待：死锁发生时，系统中必定有两个或两个以上的进程或线程组成一条等待环路。
+
+注意：死锁一旦产生基本无解，现在的操作系统无法解决死锁，因此只能防止死锁产生。
+
+3、防止死锁产生的方法
+
+    破坏占用且请求条件：采用预先静态分配的方法，进程或线程在运行前一次申请所有资源，在资源没有满足前不投入运行。
+    缺点：系统资源会被严重浪费，因为有些资源可能开始时使用，而有些资源结束时才使用。
+
+    破坏不可剥夺条件：当一个进程或线程已经占有一个不可剥夺的资源时，请求新资源时无法满足，则释放已经占有的资源，一段时间后再重新申请。
+    缺点：该策略实现起来比较复杂，释放已经获取资源可能会导致前一阶段的工作失效，反复的申请释放资源会增加系统开销，占用CPU和寄存器、内存等资源。
+
+    破坏循环等待条件：给每个资源进行编号，进程或线程按照顺序请求资源，只有拿到前一外资源，才能继续请求下一个资源。
+    缺点：资源的编号必须相对稳定，资源添加或销毁时会受到影响。
+
+算法：银行家算法
+
+4、如何判断死锁
+
+    1、画出资源分配图
+    2、简化资源分配图
+    3、使用死锁定理判断：如果没有环路肯定不会出现死锁。
+
+### **十四.线程和线程池**
+1.创建线程的方式
+
+    1.继承Thread类
+        创建一个继承于 Thread类的子类
+        重写Thread类的 run()方法->此线程执行的操作声明在 run()中，如遍历100以内所有的偶数
+        创建此子类对象
+        调用 start()方法：有两个作用：①启动当前线程 ②调用当前线程的 run()
+    
+    2.实现Runnable接口
+        创建一个实现了 Runnable接口的类
+        实现类去实现 Runnable接口中的抽象方法：run()
+        创建实现类的对象
+        将此实现类作为参数传递到 Thread类的构造器中，创建hread类的对象
+        通过 Thread类的对象调用 start()
+
+    3.实现Callable接口
+        创建一个实现 Callable接口的实现类
+        实现 call()方法，将此线程需要执行的操作声明在 call()中
+        创建 Callable接口实现类的对象
+        将此 Callable接口实现类的对象作为参数传递到 FutureTask构造器中，创建 FutureTask对象
+        将 FutureTask的对象作为参数传递到 Thread类的构造器中，创建 Thread对象，并调用 start()
+        如果对返回值感兴趣，则通过 FutureTask对象的 get()方法获取 Callable中 call()的返回值
+
+    4.线程池
+    Executors提供了一系列工厂方法用于创先线程池，返回的线程池都实现了ExecutorService接口。
+
+    public static ExecutorService newFixedThreadPool(int nThreads)
+    创建固定数目线程的线程池。
+
+    public static ExecutorService newCachedThreadPool()
+    创建一个可缓存的线程池，调用execute将重用以前构造的线程（如果线程可用）。如果现有线程没有可用的，则创建一个新线   程并添加到池中。终止并从缓存中移除那些已有 60 秒钟未被使用的线程。
+
+    public static ExecutorService newSingleThreadExecutor()
+    创建一个单线程化的Executor。
+
+    public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize)
+    创建一个支持定时及周期性的任务执行的线程池，多数情况下可用来替代Timer类。
+![img_8.png](img_8.png)
+
+2.线程池的几种工作队列
+
+    1、ArrayBlockingQueue
+    是一个基于数组结构的有界阻塞队列，此队列按 FIFO（先进先出）原则对元素进行排序。
+    2、LinkedBlockingQueue
+    一个基于链表结构的阻塞队列，此队列按FIFO （先进先出） 排序元素，吞吐量通常要高于ArrayBlockingQueue。静态工厂方法Executors.newFixedThreadPool()使用了这个队列
+    3、SynchronousQueue
+    一个不存储元素的阻塞队列。每个插入操作必须等到另一个线程调用移除操作，否则插入操作一直处于阻塞状态，吞吐量通常要高于LinkedBlockingQueue，静态工厂方法Executors.newCachedThreadPool使用了这个队列。
+    4、PriorityBlockingQueue
+    一个具有优先级的无限阻塞队列
