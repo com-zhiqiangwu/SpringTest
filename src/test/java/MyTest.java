@@ -53,19 +53,32 @@ public class MyTest {
     @Test
     public void test5(){
         /*jdk动态代理*/
-//        代理对象不需要实现接口，但是目标对象一定要实现接口，否则不能用动态代理。
-//        动态代理的方式中，所有的函数调用最终都会经过 invoke 函数的转发，因此我们就可以在这里做一些自己想做的操作，比如日志系统、事务、拦截器、权限控制等
-//        JDK 动态代理有一个最致命的问题是它只能代理实现了某个接口的实现类，并且代理类也只能代理接口中实现的方法，要是实现类中有自己私有的方法，而接口中没有的话，该方法不能进行代理调用。
+        // 代理对象不需要实现接口，但是目标对象一定要实现接口，否则不能用动态代理。
+        // 动态代理的方式中，所有的函数调用最终都会经过 invoke 函数的转发，因此我们就可以在这里做一些自己想做的操作，比如日志系统、事务、拦截器、权限控制等
+        // JDK 动态代理有一个最致命的问题是它只能代理实现了某个接口的实现类，并且代理类也只能代理接口中实现的方法，要是实现类中有自己私有的方法，而接口中没有的话，该方法不能进行代理调用。
+
+        //注意该方法(newProxyInstance)是在Proxy类中是静态方法，且接收的三个参数依次为：
+        //ClassLoader loader：指定当前目标对象使用类加载器，获取加载器的方法是固定的。
+        // Class<?>[] interfaces：目标对象实现的接口的类型，使用泛型方式确认类型。
+        // InvocationHandler h：事件处理，执行目标对象的方法时，会触发事件处理器的方法，会把当前执行目标对象的方法作为参数传入。
+
         ISomeServiceImpl iSomeService = new ISomeServiceImpl();
         JdkProxy jdkProxy = new JdkProxy(iSomeService);
         Object o = Proxy.newProxyInstance(iSomeService.getClass().getClassLoader(), iSomeService.getClass().getInterfaces(), jdkProxy);
 
         SomeService o1 = (SomeService) o;
         o1.doSome();
+
      }
 
      @Test
     public void test6(){
+
+        //Cglib代理可以称为子类代理，是在内存中构建一个子类对象，从而实现对目标对象功能的扩展。
+        //C代理商不仅想代理公司，而且还想代理多个工厂的产品。
+        //Cglib通过Enhancer 来生成代理类，通过实现MethodInterceptor接口，
+         // 并实现其中的intercept方法，在此方法中可以添加增强方法，并可以利用反射Method或者MethodProxy继承类 来调用原方法。
+
          ISomeServiceImpl iSomeService = new ISomeServiceImpl();
          Enhancer enhancer = new Enhancer();
          //设置enhancer对象的父类
