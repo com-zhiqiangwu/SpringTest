@@ -4,16 +4,13 @@ import org.junit.Test;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import proxy.ISomeServiceStaticProxyImpl;
 import proxy.JdkProxy;
 import proxy.MyMethodInterceptor;
 import service.SomeService;
 import service.impl.ISomeServiceImpl;
 
 import java.lang.reflect.Proxy;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class MyTest {
     private  static final String xml = "applicationContext.xml";
@@ -50,14 +47,15 @@ public class MyTest {
 
     @Test
     public void test4(){
-        /*静态代理*/
-        ISomeServiceStaticProxyImpl iSomeServiceProxy = new ISomeServiceStaticProxyImpl(new ISomeServiceImpl());
-        iSomeServiceProxy.doSome();
+
     }
 
     @Test
     public void test5(){
         /*jdk动态代理*/
+//        代理对象不需要实现接口，但是目标对象一定要实现接口，否则不能用动态代理。
+//        动态代理的方式中，所有的函数调用最终都会经过 invoke 函数的转发，因此我们就可以在这里做一些自己想做的操作，比如日志系统、事务、拦截器、权限控制等
+//        JDK 动态代理有一个最致命的问题是它只能代理实现了某个接口的实现类，并且代理类也只能代理接口中实现的方法，要是实现类中有自己私有的方法，而接口中没有的话，该方法不能进行代理调用。
         ISomeServiceImpl iSomeService = new ISomeServiceImpl();
         JdkProxy jdkProxy = new JdkProxy(iSomeService);
         Object o = Proxy.newProxyInstance(iSomeService.getClass().getClassLoader(), iSomeService.getClass().getInterfaces(), jdkProxy);
@@ -145,6 +143,47 @@ public class MyTest {
             }
         };
 
+    }
+
+
+    @Test
+    public void test13(){
+        TreeMap<String,Student> treeMap = new TreeMap() {{
+            put("1",new Student("张三"));
+            put("2",new Student("李四"));
+            put("3",new Student("王五"));
+            put("4",new Student("赵六"));
+        }};
+
+        for (Map.Entry<String,Student> entry:treeMap.entrySet()){
+            System.out.println(entry.getKey()+":"+entry.getValue());
+        }
+        System.out.println("*************************hashmap*********************");
+        HashMap<String,Student> hashMap = new HashMap() {{
+            put("1", new Student("张三"));
+            put("2", new Student("李四"));
+            put("3", new Student("王五"));
+            put("4", new Student("赵六"));
+        }};
+
+        for (Map.Entry<String,Student> entry:hashMap.entrySet()){
+            System.out.println(entry.getKey()+":"+entry.getValue());
+        }
+
+    }
+
+    @Test
+    public void test18(){
+        try {
+//            System.exit(1);
+            System.out.println(2/0);
+        } catch (Exception e) {
+            System.out.println("catch");
+            e.printStackTrace();
+            Runtime.getRuntime().halt(0);
+        } finally {
+            System.out.println("finally");
+        }
     }
 
 }
