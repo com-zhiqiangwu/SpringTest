@@ -1,4 +1,4 @@
-package proxy;
+package com.test.proxy;
 
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;

@@ -1,4 +1,4 @@
-package proxy.staticproxy;
+package com.test.proxy.staticproxy;
 
 public class TVConsumer {
     //某公司生产电视机，在当地销售需要找到一个代理销售商。那么客户需要购买电视机的时候，就直接通过代理商购买就可以。

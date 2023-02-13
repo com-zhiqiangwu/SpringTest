@@ -1,4 +1,4 @@
-package proxy.staticproxy;
+package com.test.proxy.staticproxy;
 
 public interface TVCompany {
     TV productTV();

@@ -11,6 +11,10 @@ public class Student {
         System.out.println("spring调用了Student无参构造方法");
     }
 
+    public Student(String name) {
+        this.name = name;
+    }
+
     public Student(String name, String age, String email, School school) {
         System.out.println("Spring调用了Student有参构造方法");
         this.name = name;
